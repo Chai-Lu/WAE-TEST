@@ -5,6 +5,7 @@ using Rampastring.XNAUI.XNAControls;
 using System;
 using System.IO;
 using TSMapEditor.Settings;
+using TSMapEditor.Resources;
 using TSMapEditor.UI.Controls;
 using TSMapEditor.UI.Windows;
 using TSMapEditor.UI.Windows.MainMenuWindows;
@@ -45,14 +46,15 @@ namespace TSMapEditor.UI
             Width = 570;
 
             var lblGameDirectory = new XNALabel(WindowManager);
-            lblGameDirectory.Name = nameof(lblGameDirectory);
+            lblGameDirectory.Name = "lblGameDirectory";
             lblGameDirectory.X = Constants.UIEmptySideSpace;
             lblGameDirectory.Y = Constants.UIEmptyTopSpace;
-            lblGameDirectory.Text = "Path to the game directory:";
+            string gameDirectoryText = stringtrans.ResourceManager.GetString("GameDirectoryText");
+            lblGameDirectory.Text = gameDirectoryText;
             AddChild(lblGameDirectory);
 
             tbGameDirectory = new EditorTextBox(WindowManager);
-            tbGameDirectory.Name = nameof(tbGameDirectory);
+            tbGameDirectory.Name = "tbGameDirectory";
             tbGameDirectory.AllowSemicolon = true;
             tbGameDirectory.X = Constants.UIEmptySideSpace;
             tbGameDirectory.Y = lblGameDirectory.Bottom + Constants.UIVerticalSpacing;
@@ -64,7 +66,7 @@ namespace TSMapEditor.UI
             }
 
 #if DEBUG
-            // When debugging we might often switch between configs - make it a bit more convenient
+            // 当调试时，我们可能经常在不同的配置之间切换 - 使其更方便一些
             string expectedPath = Path.Combine(tbGameDirectory.Text, Constants.ExpectedClientExecutableName);
             if (!File.Exists(expectedPath))
             {
@@ -76,9 +78,9 @@ namespace TSMapEditor.UI
             AddChild(tbGameDirectory);
 
             btnBrowseGameDirectory = new EditorButton(WindowManager);
-            btnBrowseGameDirectory.Name = nameof(btnBrowseGameDirectory);
+            btnBrowseGameDirectory.Name = "btnBrowseGameDirectory";
             btnBrowseGameDirectory.Width = BrowseButtonWidth;
-            btnBrowseGameDirectory.Text = "Browse...";
+            btnBrowseGameDirectory.Text = stringtrans.ResourceManager.GetString("BrowseButtonText");
             btnBrowseGameDirectory.Y = tbGameDirectory.Y;
             btnBrowseGameDirectory.X = tbGameDirectory.Right + Constants.UIEmptySideSpace;
             btnBrowseGameDirectory.Height = tbGameDirectory.Height;
@@ -86,14 +88,14 @@ namespace TSMapEditor.UI
             btnBrowseGameDirectory.LeftClick += BtnBrowseGameDirectory_LeftClick;
 
             var lblMapPath = new XNALabel(WindowManager);
-            lblMapPath.Name = nameof(lblMapPath);
+            lblMapPath.Name = "lblMapPath";
             lblMapPath.X = Constants.UIEmptySideSpace;
             lblMapPath.Y = tbGameDirectory.Bottom + Constants.UIEmptyTopSpace;
-            lblMapPath.Text = "Path of the map file to load (can be relative to game directory):";
+            lblMapPath.Text = stringtrans.ResourceManager.GetString("MapPathLabelText");
             AddChild(lblMapPath);
 
             tbMapPath = new EditorTextBox(WindowManager);
-            tbMapPath.Name = nameof(tbMapPath);
+            tbMapPath.Name = "tbMapPath";
             tbMapPath.AllowSemicolon = true;
             tbMapPath.X = Constants.UIEmptySideSpace;
             tbMapPath.Y = lblMapPath.Bottom + Constants.UIVerticalSpacing;
@@ -102,9 +104,9 @@ namespace TSMapEditor.UI
             AddChild(tbMapPath);
 
             btnBrowseMapPath = new EditorButton(WindowManager);
-            btnBrowseMapPath.Name = nameof(btnBrowseMapPath);
+            btnBrowseMapPath.Name = "btnBrowseMapPath";
             btnBrowseMapPath.Width = BrowseButtonWidth;
-            btnBrowseMapPath.Text = "Browse...";
+            btnBrowseMapPath.Text = stringtrans.ResourceManager.GetString("BrowseButtonText");
             btnBrowseMapPath.Y = tbMapPath.Y;
             btnBrowseMapPath.X = tbMapPath.Right + Constants.UIEmptySideSpace;
             btnBrowseMapPath.Height = tbMapPath.Height;
@@ -112,14 +114,14 @@ namespace TSMapEditor.UI
             btnBrowseMapPath.LeftClick += BtnBrowseMapPath_LeftClick;
 
             var lblDirectoryListing = new XNALabel(WindowManager);
-            lblDirectoryListing.Name = nameof(lblDirectoryListing);
+            lblDirectoryListing.Name = "lblDirectoryListing";
             lblDirectoryListing.X = Constants.UIEmptySideSpace;
             lblDirectoryListing.Y = tbMapPath.Bottom + Constants.UIVerticalSpacing * 2;
-            lblDirectoryListing.Text = "Alternatively, select a map file below:";
+            lblDirectoryListing.Text = stringtrans.ResourceManager.GetString("DirectoryListingText");
             AddChild(lblDirectoryListing);
 
             lbFileList = new FileBrowserListBox(WindowManager);
-            lbFileList.Name = nameof(lbFileList);
+            lbFileList.Name = "lbFileList";
             lbFileList.X = Constants.UIEmptySideSpace;
             lbFileList.Y = lblDirectoryListing.Bottom + Constants.UIVerticalSpacing;
             lbFileList.Width = Width - Constants.UIEmptySideSpace * 2;
@@ -129,18 +131,18 @@ namespace TSMapEditor.UI
             AddChild(lbFileList);
 
             btnLoad = new EditorButton(WindowManager);
-            btnLoad.Name = nameof(btnLoad);
+            btnLoad.Name = "btnLoad";
             btnLoad.Width = 150;
-            btnLoad.Text = "Load";
+            btnLoad.Text = stringtrans.ResourceManager.GetString("LoadButtonText");
             btnLoad.Y = lbFileList.Bottom + Constants.UIEmptyTopSpace;
-            btnLoad.X = lbFileList.Right - btnLoad.Width;
+            btnLoad.X = lbFileList.Right - btnLoad.Width; // 确保一致性
             AddChild(btnLoad);
             btnLoad.LeftClick += BtnLoad_LeftClick;
 
             var btnCreateNewMap = new EditorButton(WindowManager);
-            btnCreateNewMap.Name = nameof(btnCreateNewMap);
+            btnCreateNewMap.Name = "btnCreateNewMap";
             btnCreateNewMap.Width = 150;
-            btnCreateNewMap.Text = "New Map...";
+            btnCreateNewMap.Text = stringtrans.ResourceManager.GetString("CreateNewMapButtonText");
             btnCreateNewMap.X = lbFileList.X;
             btnCreateNewMap.Y = btnLoad.Y;
             AddChild(btnCreateNewMap);
@@ -149,7 +151,7 @@ namespace TSMapEditor.UI
             Height = btnLoad.Bottom + Constants.UIEmptyBottomSpace;
 
             settingsPanel = new SettingsPanel(WindowManager);
-            settingsPanel.Name = nameof(settingsPanel);
+            settingsPanel.Name = "settingsPanel";
             settingsPanel.X = Width;
             settingsPanel.Y = Constants.UIEmptyTopSpace;
             settingsPanel.Height = Height - Constants.UIEmptyTopSpace - Constants.UIEmptyBottomSpace;
@@ -191,7 +193,7 @@ namespace TSMapEditor.UI
             }
         }
 
-        private void LbFileList_FileSelected(object sender, FileSelectionEventArgs e)
+private void LbFileList_FileSelected(object sender, FileSelectionEventArgs e)
         {
             tbMapPath.Text = e.FilePath;
         }
@@ -267,19 +269,39 @@ namespace TSMapEditor.UI
 
         private bool CheckGameDirectory()
         {
-            if (!File.Exists(Path.Combine(tbGameDirectory.Text, Constants.ExpectedClientExecutableName)))
+            // 获取游戏目录下的所有.exe文件
+            string[] files = Directory.GetFiles(tbGameDirectory.Text, "*.exe");
+
+            bool hasClientInName = false;
+            string clientExecutablePath = string.Empty;
+
+            // 遍历所有.exe文件，检查文件名中是否包含"Client"
+            foreach (string file in files)
+            {
+                if (Path.GetFileName(file).Contains("Client"))
+                {
+                    hasClientInName = true;
+                    clientExecutablePath = file;
+                    break;
+                }
+            }
+
+            if (!hasClientInName)
             {
                 EditorMessageBox.Show(WindowManager,
                     "Invalid game directory",
-                    $"{Constants.ExpectedClientExecutableName} not found, please check that you typed the correct game directory.",
+                    "No executable file with 'Client' in its name was found, please check that you typed the correct game directory.",
                     MessageBoxButtons.OK);
-
                 return false;
             }
 
             gameDirectory = tbGameDirectory.Text;
+            // 确保gameDirectory以目录分隔符结尾
             if (!gameDirectory.EndsWith("/") && !gameDirectory.EndsWith("\\"))
-                gameDirectory += "/";
+                gameDirectory += Path.DirectorySeparatorChar;
+
+            // 更新文本框为实际选中的客户端可执行文件路径
+            tbGameDirectory.Text = clientExecutablePath;
 
             return true;
         }
@@ -314,12 +336,34 @@ namespace TSMapEditor.UI
             {
                 openFileDialog.InitialDirectory = tbGameDirectory.Text;
                 openFileDialog.Filter =
-                    $"Game executable|{Constants.ExpectedClientExecutableName}";
+                    $"Game executable|{Constants.ExpectedClientExecutableName}"; // 保留原有逻辑
+                openFileDialog.Filter += "| Client executable files| *.exe"; // 添加额外的过滤器，匹配任何exe文件
+
                 openFileDialog.RestoreDirectory = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    tbGameDirectory.Text = Path.GetDirectoryName(openFileDialog.FileName);
+                    string selectedFilePath = openFileDialog.FileName;
+                    string fileName = Path.GetFileName(selectedFilePath);
+
+                    // 检查选中的文件是否是预期的客户端可执行文件
+                    if (Path.GetFileName(selectedFilePath).Equals(Constants.ExpectedClientExecutableName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        tbGameDirectory.Text = Path.GetDirectoryName(selectedFilePath);
+                    }
+                    // 检查选中的文件是否是可执行文件且文件名中包含"Client"
+                    else if (Path.GetExtension(selectedFilePath).Equals(".exe", StringComparison.OrdinalIgnoreCase) && fileName.Contains("Client"))
+                    {
+                        tbGameDirectory.Text = Path.GetDirectoryName(selectedFilePath);
+                    }
+                    else
+                    {
+                        // 如果用户没有选择预期的文件或文件名中不包含"Client"的可执行文件，显示错误消息
+                        EditorMessageBox.Show(WindowManager,
+                            "Invalid File Selected",
+                            $"Please select the {Constants.ExpectedClientExecutableName} file or any executable file with 'Client' in its name.",
+                            MessageBoxButtons.OK);
+                    }
                 }
             }
 #endif

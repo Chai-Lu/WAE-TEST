@@ -8,8 +8,10 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using TSMapEditor.CCEngine;
+using TSMapEditor.Resources;
 using TSMapEditor.Settings;
 using TSMapEditor.UI;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 #if !DEBUG
 using System.Windows.Forms;
@@ -58,7 +60,8 @@ namespace TSMapEditor.Rendering
             graphics.PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8;
             Content.RootDirectory = "Content";
             graphics.SynchronizeWithVerticalRetrace = false;
-            Window.Title = "C&C World-Altering Editor (WAE)";
+            string windowTitle = stringtrans.ResourceManager.GetString("windowTitle");
+            Window.Title = windowTitle;
 
             //IsFixedTimeStep = false;
             SetTargetFPS();
