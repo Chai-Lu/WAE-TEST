@@ -288,9 +288,11 @@ private void LbFileList_FileSelected(object sender, FileSelectionEventArgs e)
 
             if (!hasClientInName)
             {
+                string title = stringtrans.ResourceManager.GetString("InvalidFileSelected_Title");
+                string message = stringtrans.ResourceManager.GetString("InvalidFileSelected_Message");
                 EditorMessageBox.Show(WindowManager,
-                    "Invalid game directory",
-                    "No executable file with 'Client' in its name was found, please check that you typed the correct game directory.",
+                    title,
+                    string.Format(message, Constants.ExpectedClientExecutableName),
                     MessageBoxButtons.OK);
                 return false;
             }
@@ -337,7 +339,7 @@ private void LbFileList_FileSelected(object sender, FileSelectionEventArgs e)
                 openFileDialog.InitialDirectory = tbGameDirectory.Text;
                 openFileDialog.Filter =
                     $"Game executable|{Constants.ExpectedClientExecutableName}"; // 保留原有逻辑
-                openFileDialog.Filter += "| Client executable files| *.exe"; // 添加额外的过滤器，匹配任何exe文件
+                openFileDialog.Filter += "|Client executable|*Client.exe"; // 添加额外的过滤器，匹配任何exe文件
 
                 openFileDialog.RestoreDirectory = true;
 
@@ -359,9 +361,17 @@ private void LbFileList_FileSelected(object sender, FileSelectionEventArgs e)
                     else
                     {
                         // 如果用户没有选择预期的文件或文件名中不包含"Client"的可执行文件，显示错误消息
+                        // 使用 ResourceManager 获取资源字符串
+                        string invalidFileSelectedTitle = stringtrans.ResourceManager.GetString("InvalidFileSelectedMD_Title");
+                        string invalidFileSelectedMessage = stringtrans.ResourceManager.GetString("InvalidFileSelectedMD_Message");
+
+                        // 格式化消息文本，插入 Constants.ExpectedClientExecutableName
+                        string formattedMessage = string.Format(invalidFileSelectedMessage, Constants.ExpectedClientExecutableName);
+
+                        // 显示消息框
                         EditorMessageBox.Show(WindowManager,
-                            "Invalid File Selected",
-                            $"Please select the {Constants.ExpectedClientExecutableName} file or any executable file with 'Client' in its name.",
+                            invalidFileSelectedTitle, // 使用从资源文件获取的标题
+                            formattedMessage, // 使用从资源文件获取并格式化的消息文本
                             MessageBoxButtons.OK);
                     }
                 }
@@ -399,9 +409,12 @@ private void LbFileList_FileSelected(object sender, FileSelectionEventArgs e)
 
             if (!File.Exists(mapPath))
             {
+                string title = stringtrans.ResourceManager.GetString("InvalidFileSelected_Title");
+                string message = string.Format(stringtrans.ResourceManager.GetString("InvalidFileSelected_Message"), Constants.ExpectedClientExecutableName);
+
                 EditorMessageBox.Show(WindowManager,
-                    "Invalid map path",
-                    "Specified map file not found. Please re-check the path to the map file.",
+                    title,
+                    message,
                     MessageBoxButtons.OK);
 
                 return;
@@ -438,7 +451,13 @@ private void LbFileList_FileSelected(object sender, FileSelectionEventArgs e)
             {
                 ApplySettings();
 
-                var messageBox = new EditorMessageBox(WindowManager, "Loading", "Please wait, loading map...", MessageBoxButtons.None);
+                // 使用 ResourceManager 获取资源字符串
+                string loadingMessageBoxText = stringtrans.ResourceManager.GetString("LoadingMessageBoxText");
+
+                // 创建消息框并设置文本
+                var messageBox = new EditorMessageBox(WindowManager, "Loading", loadingMessageBoxText, MessageBoxButtons.None);
+
+                // 创建遮罩面板并添加到父控件
                 var dp = new DarkeningPanel(WindowManager);
                 AddChild(dp);
                 dp.AddChild(messageBox);
@@ -447,7 +466,14 @@ private void LbFileList_FileSelected(object sender, FileSelectionEventArgs e)
             }
 
             loadingStage = 0;
-            EditorMessageBox.Show(WindowManager, "Error Loading File", error, MessageBoxButtons.OK);
+            string errorMessageTitle = stringtrans.ResourceManager.GetString("ErrorMessageTitle");
+            string errorMessageLoadingFile = stringtrans.ResourceManager.GetString("ErrorMessageLoadingFile");
+
+            // 显示消息框，将错误信息格式化为用户友好的文本
+            EditorMessageBox.Show(WindowManager,
+                errorMessageTitle, // 使用从资源文件获取的标题
+                errorMessageLoadingFile + (error != null ? ": " + error : string.Empty), // 使用从资源文件获取的消息文本，并附加具体错误信息（如果有）
+                MessageBoxButtons.OK);
         }
 
         private void LoadTheater()

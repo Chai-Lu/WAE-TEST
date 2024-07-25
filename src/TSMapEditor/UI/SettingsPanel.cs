@@ -4,6 +4,7 @@ using System;
 using System.Globalization;
 using System.Windows.Forms;
 using TSMapEditor.GameMath;
+using TSMapEditor.Resources;
 using TSMapEditor.Settings;
 using TSMapEditor.UI.Controls;
 
@@ -87,14 +88,16 @@ namespace TSMapEditor.UI
             var lblHeader = new XNALabel(WindowManager);
             lblHeader.Name = nameof(lblHeader);
             lblHeader.FontIndex = Constants.UIBoldFont;
-            lblHeader.Text = "Settings";
+            string lblHeaderText = stringtrans.ResourceManager.GetString("SettingsText");
+            lblHeader.Text = lblHeaderText;
             lblHeader.Y = Constants.UIEmptyTopSpace;
             AddChild(lblHeader);
             lblHeader.CenterOnParentHorizontally();
 
             var lblRenderScale = new XNALabel(WindowManager);
             lblRenderScale.Name = nameof(lblRenderScale);
-            lblRenderScale.Text = "Render Scale:";
+            string renderScaleLabelText = stringtrans.ResourceManager.GetString("RenderScaleLabelText");
+            lblRenderScale.Text = renderScaleLabelText;
             lblRenderScale.X = Constants.UIEmptySideSpace;
             lblRenderScale.Y = lblHeader.Bottom + Constants.UIEmptyTopSpace + 1;
             AddChild(lblRenderScale);
@@ -122,9 +125,10 @@ namespace TSMapEditor.UI
 
             var lblTheme = new XNALabel(WindowManager);
             lblTheme.Name = nameof(lblTheme);
-            lblTheme.Text = "Theme:";
+            string themeLabelText = stringtrans.ResourceManager.GetString("ThemeLabelText");
+            lblTheme.Text = themeLabelText;
             lblTheme.X = lblRenderScale.X;
-            lblTheme.Y = ddRenderScale.Bottom + Constants.UIEmptyTopSpace;
+            lblTheme.Y = ddRenderScale.Bottom + Constants.UIEmptyTopSpace; 
             AddChild(lblTheme);
 
             ddTheme = new XNADropDown(WindowManager);
@@ -138,7 +142,8 @@ namespace TSMapEditor.UI
 
             var lblScrollRate = new XNALabel(WindowManager);
             lblScrollRate.Name = nameof(lblScrollRate);
-            lblScrollRate.Text = "Scroll Rate:";
+            string scrollRateLabelText = stringtrans.ResourceManager.GetString("ScrollRateLabelText");
+            lblScrollRate.Text = scrollRateLabelText;
             lblScrollRate.X = lblRenderScale.X;
             lblScrollRate.Y = ddTheme.Bottom + Constants.UIEmptyTopSpace;
             AddChild(lblScrollRate);
@@ -149,7 +154,7 @@ namespace TSMapEditor.UI
             ddScrollRate.Y = lblScrollRate.Y - 1;
             ddScrollRate.Width = ddRenderScale.Width;
             AddChild(ddScrollRate);
-            var scrollRateNames = new string[] { "Fastest", "Faster", "Fast", "Normal", "Slow", "Slower", "Slowest" };
+            var scrollRateNames = new string[] { "21", "18", "15", "12", "9", "6", "3" };
             var scrollRateValues = new int[] { 21, 18, 15, 12, 9, 6, 3 };
             for (int i = 0; i < scrollRateNames.Length; i++)
             {
@@ -158,23 +163,24 @@ namespace TSMapEditor.UI
 
             chkBorderless = new XNACheckBox(WindowManager);
             chkBorderless.Name = nameof(chkBorderless);
+            string startInBorderlessModeText = stringtrans.ResourceManager.GetString("StartInBorderlessModeText");
+            chkBorderless.Text = startInBorderlessModeText;
             chkBorderless.X = Constants.UIEmptySideSpace;
             chkBorderless.Y = ddScrollRate.Bottom + Constants.UIVerticalSpacing;
-            chkBorderless.Text = "Start In Borderless Mode";
             AddChild(chkBorderless);
 
             chkUseBoldFont = new XNACheckBox(WindowManager);
             chkUseBoldFont.Name = nameof(chkUseBoldFont);
             chkUseBoldFont.X = Constants.UIEmptySideSpace;
             chkUseBoldFont.Y = chkBorderless.Bottom + Constants.UIVerticalSpacing;
-            chkUseBoldFont.Text = "Use Bold Font";
+            chkUseBoldFont.Text = stringtrans.ResourceManager.GetString("UseBoldFontLabelText");
             AddChild(chkUseBoldFont);
 
             var lblTextEditorPath = new XNALabel(WindowManager);
             lblTextEditorPath.Name = nameof(lblTextEditorPath);
-            lblTextEditorPath.Text = "Text Editor Path:";
             lblTextEditorPath.X = Constants.UIEmptySideSpace;
             lblTextEditorPath.Y = chkUseBoldFont.Bottom + Constants.UIVerticalSpacing * 2;
+            lblTextEditorPath.Text = stringtrans.ResourceManager.GetString("TextEditorPathLabelText");
             AddChild(lblTextEditorPath);
 
             tbTextEditorPath = new EditorTextBox(WindowManager);

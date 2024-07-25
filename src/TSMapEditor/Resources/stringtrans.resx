@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BrowseButtonText" xml:space="preserve">
-    <value>浏览......</value>
+    <value>查找...</value>
   </data>
   <data name="CreateNewMapButtonText" xml:space="preserve">
     <value>新地图</value>
@@ -126,17 +126,95 @@
   <data name="DirectoryListingText" xml:space="preserve">
     <value>或者,你愿意在下面选择地图</value>
   </data>
+  <data name="ErrorMessageLoadingFile" xml:space="preserve">
+    <value>文件加载出错</value>
+  </data>
+  <data name="ErrorMessageTitle" xml:space="preserve">
+    <value>错误</value>
+  </data>
   <data name="GameDirectoryLabelText" xml:space="preserve">
     <value>游戏目录:</value>
   </data>
   <data name="GameDirectoryText" xml:space="preserve">
     <value>游戏路径[指向特定的可执行文件 eg:YRCLient.exe]</value>
   </data>
+  <data name="InvalidFileSelectedMD_Message" xml:space="preserve">
+    <value>请选择 {0} 文件或任何文件名包含 'Client' 的可执行文件</value>
+  </data>
+  <data name="InvalidFileSelectedMD_Title" xml:space="preserve">
+    <value>无效的文件选择</value>
+  </data>
+  <data name="InvalidFileSelected_Message" xml:space="preserve">
+    <value>并不是合法的游戏可运行文件 请尝试修改后重试</value>
+  </data>
+  <data name="InvalidFileSelected_Title" xml:space="preserve">
+    <value>错误的游戏文件路径</value>
+  </data>
+  <data name="InvalidMapPath_Message" xml:space="preserve">
+    <value>地图路径存在问题，请尝试修改后重试。</value>
+  </data>
+  <data name="InvalidMapPath_Title" xml:space="preserve">
+    <value>错误地图路径</value>
+  </data>
   <data name="LoadButtonText" xml:space="preserve">
     <value>载入</value>
   </data>
+  <data name="LoadingMessageBoxText" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
   <data name="MapPathLabelText" xml:space="preserve">
-    <value>可加载的地图文件目录 [可指定为相对目录]</value>
+    <value>可加载的地图文件地址 [可指定为相对地址]</value>
+  </data>
+  <data name="MapTooLarge_Message" xml:space="preserve">
+    <value>地图宽度加高度不能超过 {0} 单元格</value>
+  </data>
+  <data name="MapTooLarge_Title" xml:space="preserve">
+    <value>地图太大</value>
+  </data>
+  <data name="MapTooLong_Message" xml:space="preserve">
+    <value>地图高度不能超过 {0} 单元格</value>
+  </data>
+  <data name="MapTooLong_Title" xml:space="preserve">
+    <value>地图太长</value>
+  </data>
+  <data name="MapTooNarrow_Message" xml:space="preserve">
+    <value>地图宽度必须至少是 {0} 单元格</value>
+  </data>
+  <data name="MapTooNarrow_Title" xml:space="preserve">
+    <value>地图太窄</value>
+  </data>
+  <data name="MapTooSmall_Message" xml:space="preserve">
+    <value>地图高度必须至少是 {0} 单元格</value>
+  </data>
+  <data name="MapTooSmall_Title" xml:space="preserve">
+    <value>地图太小</value>
+  </data>
+  <data name="MapTooWide_Message" xml:space="preserve">
+    <value>地图宽度不能超过 {0} 单元格</value>
+  </data>
+  <data name="MapTooWide_Title" xml:space="preserve">
+    <value>地图太宽</value>
+  </data>
+  <data name="RenderScaleLabelText" xml:space="preserve">
+    <value>渲染比例: </value>
+  </data>
+  <data name="ScrollRateLabelText" xml:space="preserve">
+    <value>滚动速度:</value>
+  </data>
+  <data name="SettingsText" xml:space="preserve">
+    <value>设置项</value>
+  </data>
+  <data name="StartInBorderlessModeText" xml:space="preserve">
+    <value>以无边框模式启动</value>
+  </data>
+  <data name="TextEditorPathLabelText" xml:space="preserve">
+    <value>文本编辑器路径</value>
+  </data>
+  <data name="ThemeLabelText" xml:space="preserve">
+    <value>主题: </value>
+  </data>
+  <data name="UseBoldFontLabelText" xml:space="preserve">
+    <value>使用粗体字体</value>
   </data>
   <data name="windowTitle" xml:space="preserve">
     <value>WAE CHN Version Beta</value>

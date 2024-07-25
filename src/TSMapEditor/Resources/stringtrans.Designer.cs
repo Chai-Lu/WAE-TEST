@@ -61,7 +61,7 @@ namespace TSMapEditor.Resources {
         }
         
         /// <summary>
-        ///   查找类似 浏览...... 的本地化字符串。
+        ///   查找类似 查找... 的本地化字符串。
         /// </summary>
         internal static string BrowseButtonText {
             get {
@@ -88,6 +88,24 @@ namespace TSMapEditor.Resources {
         }
         
         /// <summary>
+        ///   查找类似 文件加载出错 的本地化字符串。
+        /// </summary>
+        internal static string ErrorMessageLoadingFile {
+            get {
+                return ResourceManager.GetString("ErrorMessageLoadingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 错误 的本地化字符串。
+        /// </summary>
+        internal static string ErrorMessageTitle {
+            get {
+                return ResourceManager.GetString("ErrorMessageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 游戏目录: 的本地化字符串。
         /// </summary>
         internal static string GameDirectoryLabelText {
@@ -106,6 +124,60 @@ namespace TSMapEditor.Resources {
         }
         
         /// <summary>
+        ///   查找类似 并不是合法的游戏可运行文件 请尝试修改后重试 的本地化字符串。
+        /// </summary>
+        internal static string InvalidFileSelected_Message {
+            get {
+                return ResourceManager.GetString("InvalidFileSelected_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 错误的游戏文件路径 的本地化字符串。
+        /// </summary>
+        internal static string InvalidFileSelected_Title {
+            get {
+                return ResourceManager.GetString("InvalidFileSelected_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请选择 {0} 文件或任何文件名包含 &apos;Client&apos; 的可执行文件 的本地化字符串。
+        /// </summary>
+        internal static string InvalidFileSelectedMD_Message {
+            get {
+                return ResourceManager.GetString("InvalidFileSelectedMD_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无效的文件选择 的本地化字符串。
+        /// </summary>
+        internal static string InvalidFileSelectedMD_Title {
+            get {
+                return ResourceManager.GetString("InvalidFileSelectedMD_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图路径存在问题，请尝试修改后重试。 的本地化字符串。
+        /// </summary>
+        internal static string InvalidMapPath_Message {
+            get {
+                return ResourceManager.GetString("InvalidMapPath_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 错误地图路径 的本地化字符串。
+        /// </summary>
+        internal static string InvalidMapPath_Title {
+            get {
+                return ResourceManager.GetString("InvalidMapPath_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 载入 的本地化字符串。
         /// </summary>
         internal static string LoadButtonText {
@@ -115,11 +187,173 @@ namespace TSMapEditor.Resources {
         }
         
         /// <summary>
-        ///   查找类似 可加载的地图文件目录 [可指定为相对目录] 的本地化字符串。
+        ///   查找类似 Loading... 的本地化字符串。
+        /// </summary>
+        internal static string LoadingMessageBoxText {
+            get {
+                return ResourceManager.GetString("LoadingMessageBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 可加载的地图文件地址 [可指定为相对地址] 的本地化字符串。
         /// </summary>
         internal static string MapPathLabelText {
             get {
                 return ResourceManager.GetString("MapPathLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图宽度加高度不能超过 {0} 单元格 的本地化字符串。
+        /// </summary>
+        internal static string MapTooLarge_Message {
+            get {
+                return ResourceManager.GetString("MapTooLarge_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图太大 的本地化字符串。
+        /// </summary>
+        internal static string MapTooLarge_Title {
+            get {
+                return ResourceManager.GetString("MapTooLarge_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图高度不能超过 {0} 单元格 的本地化字符串。
+        /// </summary>
+        internal static string MapTooLong_Message {
+            get {
+                return ResourceManager.GetString("MapTooLong_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图太长 的本地化字符串。
+        /// </summary>
+        internal static string MapTooLong_Title {
+            get {
+                return ResourceManager.GetString("MapTooLong_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图宽度必须至少是 {0} 单元格 的本地化字符串。
+        /// </summary>
+        internal static string MapTooNarrow_Message {
+            get {
+                return ResourceManager.GetString("MapTooNarrow_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图太窄 的本地化字符串。
+        /// </summary>
+        internal static string MapTooNarrow_Title {
+            get {
+                return ResourceManager.GetString("MapTooNarrow_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图高度必须至少是 {0} 单元格 的本地化字符串。
+        /// </summary>
+        internal static string MapTooSmall_Message {
+            get {
+                return ResourceManager.GetString("MapTooSmall_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图太小 的本地化字符串。
+        /// </summary>
+        internal static string MapTooSmall_Title {
+            get {
+                return ResourceManager.GetString("MapTooSmall_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图宽度不能超过 {0} 单元格 的本地化字符串。
+        /// </summary>
+        internal static string MapTooWide_Message {
+            get {
+                return ResourceManager.GetString("MapTooWide_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图太宽 的本地化字符串。
+        /// </summary>
+        internal static string MapTooWide_Title {
+            get {
+                return ResourceManager.GetString("MapTooWide_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 渲染比例:  的本地化字符串。
+        /// </summary>
+        internal static string RenderScaleLabelText {
+            get {
+                return ResourceManager.GetString("RenderScaleLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 滚动速度: 的本地化字符串。
+        /// </summary>
+        internal static string ScrollRateLabelText {
+            get {
+                return ResourceManager.GetString("ScrollRateLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 设置项 的本地化字符串。
+        /// </summary>
+        internal static string SettingsText {
+            get {
+                return ResourceManager.GetString("SettingsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 以无边框模式启动 的本地化字符串。
+        /// </summary>
+        internal static string StartInBorderlessModeText {
+            get {
+                return ResourceManager.GetString("StartInBorderlessModeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 文本编辑器路径 的本地化字符串。
+        /// </summary>
+        internal static string TextEditorPathLabelText {
+            get {
+                return ResourceManager.GetString("TextEditorPathLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 主题:  的本地化字符串。
+        /// </summary>
+        internal static string ThemeLabelText {
+            get {
+                return ResourceManager.GetString("ThemeLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 使用粗体字体 的本地化字符串。
+        /// </summary>
+        internal static string UseBoldFontLabelText {
+            get {
+                return ResourceManager.GetString("UseBoldFontLabelText", resourceCulture);
             }
         }
         
