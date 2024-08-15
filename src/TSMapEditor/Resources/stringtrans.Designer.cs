@@ -61,6 +61,60 @@ namespace TSMapEditor.Resources {
         }
         
         /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string _11223 {
+            get {
+                return ResourceManager.GetString("11223", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string _112233 {
+            get {
+                return ResourceManager.GetString("112233", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string _12223 {
+            get {
+                return ResourceManager.GetString("12223", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string _12333 {
+            get {
+                return ResourceManager.GetString("12333", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 自动保存地图失败,请确保您没有从受写保护的目录(例如程序文件)运行编辑器. {1}{1}返回的操作系统错误: {2} 的本地化字符串。
+        /// </summary>
+        internal static string AutoSaveFailedMessage {
+            get {
+                return ResourceManager.GetString("AutoSaveFailedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 WAE CHN Version Beta - {0} 的本地化字符串。
+        /// </summary>
+        internal static string BaseTitle {
+            get {
+                return ResourceManager.GetString("BaseTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 查找... 的本地化字符串。
         /// </summary>
         internal static string BrowseButtonText {
@@ -106,6 +160,15 @@ namespace TSMapEditor.Resources {
         }
         
         /// <summary>
+        ///   查找类似 未能载入地图 的本地化字符串。
+        /// </summary>
+        internal static string FailedToOpenMapTitle {
+            get {
+                return ResourceManager.GetString("FailedToOpenMapTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 游戏目录: 的本地化字符串。
         /// </summary>
         internal static string GameDirectoryLabelText {
@@ -124,7 +187,7 @@ namespace TSMapEditor.Resources {
         }
         
         /// <summary>
-        ///   查找类似 并不是合法的游戏可运行文件 请尝试修改后重试 的本地化字符串。
+        ///   查找类似 并不是可用的地图文件 请尝试修改后重试 的本地化字符串。
         /// </summary>
         internal static string InvalidFileSelected_Message {
             get {
@@ -178,11 +241,38 @@ namespace TSMapEditor.Resources {
         }
         
         /// <summary>
+        ///   查找类似 地图已保存,但在地图中发现了一个问题或多个问题.请考虑解决它们 的本地化字符串。
+        /// </summary>
+        internal static string IssuesFoundMessage {
+            get {
+                return ResourceManager.GetString("IssuesFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 问题 的本地化字符串。
+        /// </summary>
+        internal static string IssuesFoundTitle {
+            get {
+                return ResourceManager.GetString("IssuesFoundTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 载入 的本地化字符串。
         /// </summary>
         internal static string LoadButtonText {
             get {
                 return ResourceManager.GetString("LoadButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在加载地图... 的本地化字符串。
+        /// </summary>
+        internal static string LoadingMessage {
+            get {
+                return ResourceManager.GetString("LoadingMessage", resourceCulture);
             }
         }
         
@@ -196,11 +286,47 @@ namespace TSMapEditor.Resources {
         }
         
         /// <summary>
+        ///   查找类似 加载中 的本地化字符串。
+        /// </summary>
+        internal static string LoadingTitle {
+            get {
+                return ResourceManager.GetString("LoadingTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图已自动保存 的本地化字符串。
+        /// </summary>
+        internal static string MapAutoSavedNotification {
+            get {
+                return ResourceManager.GetString("MapAutoSavedNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图文件已在编辑器外部被修改.地图的INI已重新加载。{0}{0}如果您对可见的地图数据(地形 对象 覆盖层等)在编辑器外部进行了编辑,您需要重新加载地图以应用更改.如果您只对其他INI进行了更改,您可以忽略此消息. 的本地化字符串。
+        /// </summary>
+        internal static string MapModifiedOutsideNotification {
+            get {
+                return ResourceManager.GetString("MapModifiedOutsideNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 可加载的地图文件地址 [可指定为相对地址] 的本地化字符串。
         /// </summary>
         internal static string MapPathLabelText {
             get {
                 return ResourceManager.GetString("MapPathLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 地图已保存 的本地化字符串。
+        /// </summary>
+        internal static string MapSavedNotification {
+            get {
+                return ResourceManager.GetString("MapSavedNotification", resourceCulture);
             }
         }
         
@@ -291,6 +417,15 @@ namespace TSMapEditor.Resources {
         internal static string MapTooWide_Title {
             get {
                 return ResourceManager.GetString("MapTooWide_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 新地图 的本地化字符串。
+        /// </summary>
+        internal static string NewMap {
+            get {
+                return ResourceManager.GetString("NewMap", resourceCulture);
             }
         }
         

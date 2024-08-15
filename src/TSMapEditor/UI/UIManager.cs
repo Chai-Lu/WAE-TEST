@@ -7,6 +7,7 @@ using TSMapEditor.Misc;
 using TSMapEditor.Models;
 using TSMapEditor.Mutations;
 using TSMapEditor.Rendering;
+using TSMapEditor.Resources;
 using TSMapEditor.Settings;
 using TSMapEditor.UI.Controls;
 using TSMapEditor.UI.CursorActions;
@@ -348,21 +349,23 @@ namespace TSMapEditor.UI
 
             map.MapManuallySaved += (s, e) =>
             {
-                notificationManager.AddNotification("Map saved.");
+                notificationManager.AddNotification(stringtrans.ResourceManager.GetString("MapSavedNotification"));
                 RefreshWindowTitle();
                 CheckForIssuesAfterManualSave(s, e);
             };
 
-            map.MapAutoSaved += (s, e) => notificationManager.AddNotification("Map auto-saved.");
+            map.MapAutoSaved += (s, e) => notificationManager.AddNotification(stringtrans.ResourceManager.GetString("MapAutoSavedNotification"));
         }
 
 
         private void RefreshWindowTitle()
         {
-            string baseTitle = "C&C World-Altering Editor (WAE) - {0}";
+            string baseTitle = stringtrans.ResourceManager.GetString("BaseTitle");
             string mapPath;
 
-            mapPath = string.IsNullOrWhiteSpace(map.LoadedINI.FileName) ? "New map" : map.LoadedINI.FileName;
+            mapPath = string.IsNullOrWhiteSpace(map.LoadedINI.FileName) ?
+                       stringtrans.ResourceManager.GetString("NewMap") :
+                       map.LoadedINI.FileName;
 
             Game.Window.Title = string.Format(baseTitle, mapPath);
         }
@@ -380,8 +383,11 @@ namespace TSMapEditor.UI
 
                 string issuesString = string.Join(newline + newline, issues);
 
-                EditorMessageBox.Show(WindowManager, "Issues Found",
-                    "The map has been saved, but one or more issues have been found in the map. Please consider resolving them." + newline + newline + issuesString,
+                string issuesFoundTitle = stringtrans.ResourceManager.GetString("IssuesFoundTitle");
+                string issuesFoundMessage = stringtrans.ResourceManager.GetString("IssuesFoundMessage");
+                EditorMessageBox.Show(WindowManager,
+                    issuesFoundTitle,
+                    string.Format(issuesFoundMessage, newline, newline, issuesString),
                     MessageBoxButtons.OK);
             }
         }
@@ -418,7 +424,10 @@ namespace TSMapEditor.UI
 
         private void StartLoadingMap()
         {
-            var messageBox = new EditorMessageBox(WindowManager, "Loading", "Please wait, loading map...", MessageBoxButtons.None);
+            var messageBox = new EditorMessageBox(WindowManager,
+                stringtrans.ResourceManager.GetString("LoadingTitle"),
+                stringtrans.ResourceManager.GetString("LoadingMessage"),
+                MessageBoxButtons.None);
             mapLoadDarkeningPanel = new DarkeningPanel(WindowManager);
             mapLoadDarkeningPanel.DrawOrder = int.MaxValue;
             mapLoadDarkeningPanel.UpdateOrder = int.MaxValue;
@@ -441,8 +450,11 @@ namespace TSMapEditor.UI
 
             if (error != null)
             {
-                EditorMessageBox.Show(WindowManager, "Failed to open map",
-                    error, MessageBoxButtons.OK);
+                EditorMessageBox.Show(WindowManager,
+                    stringtrans.ResourceManager.GetString("FailedToOpenMapTitle"),
+                    error,
+                    MessageBoxButtons.OK);
+
                 loadMapStage = 0;
                 RemoveChild(mapLoadDarkeningPanel);
                 mapLoadDarkeningPanel.Kill();
@@ -689,9 +701,8 @@ namespace TSMapEditor.UI
             {
                 if (mapFileWatcher.HandleModifyEvent())
                 {
-                    notificationManager.AddNotification("The map file has been modified outside of the editor. The map's INI data has been reloaded." + Environment.NewLine + Environment.NewLine +
-                        "If you made edits to visible map data (terrain, objects, overlay etc.) outside of the editor, you can" + Environment.NewLine +
-                        "re-load the map to apply the effects. If you only made changes to other INI data, you can ignore this message.");
+                    string modifiedOutsideNotification = stringtrans.ResourceManager.GetString("MapModifiedOutsideNotification");
+                    notificationManager.AddNotification(string.Format(modifiedOutsideNotification, Environment.NewLine, Environment.NewLine));
                 }
             }
         }
@@ -712,9 +723,8 @@ namespace TSMapEditor.UI
                 string error = autosaveTimer.Update(gameTime.ElapsedGameTime);
                 if (error != null)
                 {
-                    NotificationManager.AddNotification("Failed to auto-save the map." + Environment.NewLine + Environment.NewLine + 
-                        "Please make sure that you are not running the editor from a write-protected directory (such as Program Files)." + Environment.NewLine + Environment.NewLine + 
-                        "Returned OS error: " + error);
+                    string autoSaveFailedMessage = stringtrans.ResourceManager.GetString("AutoSaveFailedMessage");
+                    NotificationManager.AddNotification(string.Format(autoSaveFailedMessage, Environment.NewLine, Environment.NewLine, error));
                 }
 
                 UpdateMapFileWatcher();
