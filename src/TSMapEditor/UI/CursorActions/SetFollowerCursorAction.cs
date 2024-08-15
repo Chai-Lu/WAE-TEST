@@ -43,9 +43,9 @@ namespace TSMapEditor.UI.CursorActions
             if (cell != null && cell.Vehicles.Count > 0 && cell.Vehicles[0] != UnitToFollow)
                 color = Color.Yellow;
 
-            var rect = new Rectangle(x - Constants.UIEmptySideSpace, 
-                y - Constants.UIEmptyTopSpace, 
-                (int)textDimensions.X + Constants.UIEmptySideSpace * 2, 
+            var rect = new Rectangle(x - Constants.UIEmptySideSpace,
+                y - Constants.UIEmptyTopSpace,
+                (int)textDimensions.X + Constants.UIEmptySideSpace * 2,
                 (int)textDimensions.Y + Constants.UIEmptyTopSpace + Constants.UIEmptyBottomSpace);
 
             Renderer.FillRectangle(rect, UISettings.ActiveSettings.PanelBackgroundColor);
@@ -57,7 +57,7 @@ namespace TSMapEditor.UI.CursorActions
                 color);
         }
 
-        public override void OnKeyPressed(KeyPressEventArgs e)
+        public override void OnKeyPressed(KeyPressEventArgs e, Point2D cellCoords)
         {
             if (e.PressedKey == Microsoft.Xna.Framework.Input.Keys.Escape)
             {

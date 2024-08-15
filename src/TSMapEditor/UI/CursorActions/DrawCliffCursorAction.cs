@@ -96,7 +96,7 @@ namespace TSMapEditor.UI.CursorActions
             }
         }
 
-        public override void OnKeyPressed(KeyPressEventArgs e)
+        public override void OnKeyPressed(KeyPressEventArgs e, Point2D cellCoords)
         {
             if (e.PressedKey == Microsoft.Xna.Framework.Input.Keys.Escape)
             {
@@ -118,7 +118,7 @@ namespace TSMapEditor.UI.CursorActions
             {
                 if (cliffPath.Count > 0)
                     cliffPath.RemoveAt(cliffPath.Count - 1);
-                
+
                 RedrawPreview();
 
                 e.Handled = true;

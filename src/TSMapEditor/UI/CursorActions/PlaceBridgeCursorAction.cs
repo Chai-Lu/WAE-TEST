@@ -120,15 +120,15 @@ namespace TSMapEditor.UI.CursorActions
                     corner1 = actualStartPoint + new Point2D(1, 0);
                     corner1 = getCellCenterPoint(corner1, CursorActionTarget.Map) - cameraTopLeftPoint;
                     corner1 += new Point2D(Constants.CellSizeX / 2, 0);
-                    
+
                     corner2 = actualStartPoint + new Point2D(-1, 0);
                     corner2 = getCellCenterPoint(corner2, CursorActionTarget.Map) - cameraTopLeftPoint;
                     corner2 += new Point2D(0, Constants.CellSizeY / -2);
-                    
+
                     corner3 = cellEndPoint + new Point2D(1, 0);
                     corner3 = getCellCenterPoint(corner3, CursorActionTarget.Map) - cameraTopLeftPoint;
                     corner3 += new Point2D(0, Constants.CellSizeY / 2);
-                    
+
                     corner4 = cellEndPoint + new Point2D(-1, 0);
                     corner4 = getCellCenterPoint(corner4, CursorActionTarget.Map) - cameraTopLeftPoint;
                     corner4 += new Point2D(Constants.CellSizeX / -2, 0);
@@ -149,7 +149,7 @@ namespace TSMapEditor.UI.CursorActions
             }
         }
 
-        public override void OnKeyPressed(KeyPressEventArgs e)
+        public override void OnKeyPressed(KeyPressEventArgs e, Point2D cellCoords)
         {
             if (e.PressedKey == Microsoft.Xna.Framework.Input.Keys.Escape)
             {
@@ -164,7 +164,7 @@ namespace TSMapEditor.UI.CursorActions
 
                 e.Handled = true;
             }
-            else if (e.PressedKey == Microsoft.Xna.Framework.Input.Keys.Enter && 
+            else if (e.PressedKey == Microsoft.Xna.Framework.Input.Keys.Enter &&
                 startPoint != Point2D.NegativeOne && endPoint != Point2D.NegativeOne && endPoint != startPoint)
             {
                 var bridgeDirection = GetBridgeDirection();
