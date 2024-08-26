@@ -91,6 +91,7 @@ namespace TSMapEditor.UI.Windows
         private SelectStringWindow selectStringWindow;
         private SelectSpeechWindow selectSpeechWindow;
         private SelectSoundWindow selectSoundWindow;
+        private SelectParticleSystemTypeWindow selectParticleSystemTypeWindow;
 
         private XNAContextMenu actionContextMenu;
         private XNAContextMenu eventContextMenu;
@@ -275,6 +276,10 @@ namespace TSMapEditor.UI.Windows
             var soundDarkeningPanel = DarkeningPanel.InitializeAndAddToParentControlWithChild(WindowManager, Parent, selectSoundWindow);
             soundDarkeningPanel.Hidden += SoundDarkeningPanel_Hidden;
 
+            selectParticleSystemTypeWindow = new SelectParticleSystemTypeWindow(WindowManager, map);
+            var particleSystemTypeDarkeningPanel = DarkeningPanel.InitializeAndAddToParentControlWithChild(WindowManager, Parent, selectParticleSystemTypeWindow);
+            particleSystemTypeDarkeningPanel.Hidden += ParticleSystemTypeDarkeningPanel_Hidden;
+
             eventContextMenu = new XNAContextMenu(WindowManager);
             eventContextMenu.Name = nameof(eventContextMenu);
             eventContextMenu.Width = lbEvents.Width;
@@ -403,71 +408,68 @@ namespace TSMapEditor.UI.Windows
             if (editedTrigger == null)
                 return;
 
+            var stringBuilder = new StringBuilder();
+
             var tag = map.Tags.Find(t => t.Trigger == editedTrigger);
             if (tag == null)
             {
-                EditorMessageBox.Show(WindowManager, "No tag found", 
-                    $"The selected trigger '{editedTrigger.Name}' has no" +
-                    $"associated tag. As such, it is not attached to any objects.",
-                    MessageBoxButtons.OK);
-
-                return;
+                stringBuilder.Append($"The selected trigger {editedTrigger.Name} has no associated tag. As such, it is not attached to any objects.");
             }
-
-            var objectList = new List<TechnoBase>();
-            map.Infantry.ForEach(inf => AddObjectToListIfLinkedToTag(inf, objectList, tag));
-            map.Units.ForEach(unit => AddObjectToListIfLinkedToTag(unit, objectList, tag));
-            map.Structures.ForEach(structure => AddObjectToListIfLinkedToTag(structure, objectList, tag));
-            map.Aircraft.ForEach(aircraft => AddObjectToListIfLinkedToTag(aircraft, objectList, tag));
-
-            var stringBuilder = new StringBuilder();
-
-            if (objectList.Count > 0)
+            else
             {
-                stringBuilder.Append($"The selected trigger '{editedTrigger.Name}' is linked to the following objects:\r\n");
+                var objectList = new List<TechnoBase>();
+                map.Infantry.ForEach(inf => AddObjectToListIfLinkedToTag(inf, objectList, tag));
+                map.Units.ForEach(unit => AddObjectToListIfLinkedToTag(unit, objectList, tag));
+                map.Structures.ForEach(structure => AddObjectToListIfLinkedToTag(structure, objectList, tag));
+                map.Aircraft.ForEach(aircraft => AddObjectToListIfLinkedToTag(aircraft, objectList, tag));
 
-                objectList.ForEach(techno =>
+                if (objectList.Count > 0)
                 {
-                    switch (techno.WhatAmI())
+                    stringBuilder.Append($"The selected trigger '{editedTrigger.Name}' is linked to the following objects:\r\n");
+
+                    objectList.ForEach(techno =>
                     {
-                        case RTTIType.Aircraft:
-                            AppendToStringBuilder((Aircraft)techno, stringBuilder);
-                            break;
-                        case RTTIType.Building:
-                            AppendToStringBuilder((Structure)techno, stringBuilder);
-                            break;
-                        case RTTIType.Infantry:
-                            AppendToStringBuilder((Infantry)techno, stringBuilder);
-                            break;
-                        case RTTIType.Unit:
-                            AppendToStringBuilder((Unit)techno, stringBuilder);
-                            break;
-                        default:
-                            throw new NotImplementedException("Unknown RTTI type encountered when listing linked objects for a trigger.");
-                    }
-                });
+                        switch (techno.WhatAmI())
+                        {
+                            case RTTIType.Aircraft:
+                                AppendToStringBuilder((Aircraft)techno, stringBuilder);
+                                break;
+                            case RTTIType.Building:
+                                AppendToStringBuilder((Structure)techno, stringBuilder);
+                                break;
+                            case RTTIType.Infantry:
+                                AppendToStringBuilder((Infantry)techno, stringBuilder);
+                                break;
+                            case RTTIType.Unit:
+                                AppendToStringBuilder((Unit)techno, stringBuilder);
+                                break;
+                            default:
+                                throw new NotImplementedException("Unknown RTTI type encountered when listing linked objects for a trigger.");
+                        }
+                    });
 
-                stringBuilder.Append(Environment.NewLine);
-            }
-
-            var teamTypes = map.TeamTypes.FindAll(tt => tt.Tag == tag);
-            if (teamTypes.Count > 0)
-            {
-                foreach (var teamType in teamTypes)
-                {
-                    stringBuilder.Append($"The trigger is linked to TeamType '{teamType.Name}' ({teamType.ININame}).");
                     stringBuilder.Append(Environment.NewLine);
+                }
+
+                var teamTypes = map.TeamTypes.FindAll(tt => tt.Tag == tag);
+                if (teamTypes.Count > 0)
+                {
+                    foreach (var teamType in teamTypes)
+                    {
+                        stringBuilder.Append($"The trigger is linked to TeamType '{teamType.Name}' ({teamType.ININame}).");
+                        stringBuilder.Append(Environment.NewLine);
+                    }
+                }
+
+                var celltag = map.CellTags.Find(ct => ct.Tag == tag);
+                if (celltag != null)
+                {
+                    stringBuilder.Append(Environment.NewLine);
+                    stringBuilder.Append("The trigger is linked to one or more celltags (first match at " + celltag.Position + ").");
                 }
             }
 
-            var celltag = map.CellTags.Find(ct => ct.Tag == tag);
-            if (celltag != null)
-            {
-                stringBuilder.Append(Environment.NewLine);
-                stringBuilder.Append("The trigger is linked to one or more celltags (first match at " + celltag.Position + ").");
-            }
-
-            // Check other triggers to see whether this trigger is referenced to by them
+            // Check other triggers to see whether this trigger is referenced by them
             var allReferringTriggers = map.Triggers.FindAll(trig => {
                 foreach (var triggerAction in trig.Actions)
                 {
@@ -492,7 +494,7 @@ namespace TSMapEditor.UI.Windows
             if (allReferringTriggers.Count > 0)
             {
                 stringBuilder.Append(Environment.NewLine);
-                stringBuilder.Append("The trigger is referenced to by the following other triggers:");
+                stringBuilder.Append("The trigger is referenced by the following other triggers:");
                 allReferringTriggers.ForEach(trig => stringBuilder.Append(Environment.NewLine + $"    - {trig.Name} ({trig.ID})"));
             }
 
@@ -1009,6 +1011,11 @@ namespace TSMapEditor.UI.Windows
                     map.Rules.SuperWeaponTypes.ForEach(sw => ctxActionParameterPresetValues.AddItem(sw.GetDisplayString()));
                     ctxActionParameterPresetValues.Open(GetCursorPoint());
                     break;
+                case TriggerParamType.ParticleSystem:
+                    ParticleSystemType existingParticleSystemType = map.Rules.ParticleSystemTypes.Find(pst => pst.Index == Conversions.IntFromString(triggerAction.Parameters[paramIndex], -1));
+                    selectParticleSystemTypeWindow.IsForEvent = false;
+                    selectParticleSystemTypeWindow.Open(existingParticleSystemType);
+                    break;
                 case TriggerParamType.Speech:
                     selectSpeechWindow.IsForEvent = false;
                     EvaSpeech speech = Constants.IsRA2YR
@@ -1136,6 +1143,14 @@ namespace TSMapEditor.UI.Windows
 
             var sound = selectSoundWindow.SelectedObject;
             AssignParamValue(selectSoundWindow.IsForEvent, Constants.IsRA2YR ? sound.Name : sound.Index.ToString(CultureInfo.InvariantCulture));
+        }
+
+        private void ParticleSystemTypeDarkeningPanel_Hidden(object sender, EventArgs e)
+        {
+            if (selectParticleSystemTypeWindow.SelectedObject == null)
+                return;
+
+            AssignParamValue(selectParticleSystemTypeWindow.IsForEvent, selectParticleSystemTypeWindow.SelectedObject.Index);
         }
 
         private void AssignParamValue(bool isForEvent, int paramValue)
@@ -2063,6 +2078,14 @@ namespace TSMapEditor.UI.Windows
                         return intValue + " - nonexistent super weapon";
 
                     return intValue + " " + map.Rules.SuperWeaponTypes[intValue].GetDisplayStringWithoutIndex();
+                case TriggerParamType.ParticleSystem:
+                    if (!intParseSuccess)
+                        return paramValue;
+
+                    if (intValue >= map.Rules.ParticleSystemTypes.Count)
+                        return intValue + " - nonexistent particle system";
+
+                    return intValue + " " + map.Rules.ParticleSystemTypes[intValue].ININame;
                 case TriggerParamType.Speech:
                     EvaSpeech speech;
 
