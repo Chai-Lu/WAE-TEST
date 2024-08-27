@@ -117,26 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="11223" xml:space="preserve">
-    <value />
-  </data>
-  <data name="112233" xml:space="preserve">
-    <value />
-  </data>
-  <data name="12223" xml:space="preserve">
-    <value />
-  </data>
-  <data name="12333" xml:space="preserve">
-    <value />
-  </data>
-  <data name="AutoSaveFailedMessage" xml:space="preserve">
-    <value>自动保存地图失败,请确保您没有从受写保护的目录(例如程序文件)运行编辑器. {1}{1}返回的操作系统错误: {2}</value>
-    <comment>Failed to auto-save the map. Please make sure that you are not running the editor from a write-protected directory (such as "Program Files"). {0}\n\nReturned OS error: {1}</comment>
-  </data>
-  <data name="BaseTitle" xml:space="preserve">
-    <value>WAE CHN Version Beta - {0}</value>
-    <comment>C&amp;C World-Altering Editor (WAE) - {0}</comment>
-  </data>
   <data name="BrowseButtonText" xml:space="preserve">
     <value>查找...</value>
   </data>
@@ -152,10 +132,6 @@
   <data name="ErrorMessageTitle" xml:space="preserve">
     <value>错误</value>
   </data>
-  <data name="FailedToOpenMapTitle" xml:space="preserve">
-    <value>未能载入地图</value>
-    <comment>Failed to open map</comment>
-  </data>
   <data name="GameDirectoryLabelText" xml:space="preserve">
     <value>游戏目录:</value>
   </data>
@@ -169,7 +145,7 @@
     <value>无效的文件选择</value>
   </data>
   <data name="InvalidFileSelected_Message" xml:space="preserve">
-    <value>并不是可用的地图文件 请尝试修改后重试</value>
+    <value>并不是合法的游戏可运行文件 请尝试修改后重试</value>
   </data>
   <data name="InvalidFileSelected_Title" xml:space="preserve">
     <value>错误的游戏文件路径</value>
@@ -180,42 +156,14 @@
   <data name="InvalidMapPath_Title" xml:space="preserve">
     <value>错误地图路径</value>
   </data>
-  <data name="IssuesFoundMessage" xml:space="preserve">
-    <value>地图已保存,但在地图中发现了一个问题或多个问题.请考虑解决它们</value>
-    <comment>The map has been saved, but one or more issues have been found in the map. Please consider resolving them.</comment>
-  </data>
-  <data name="IssuesFoundTitle" xml:space="preserve">
-    <value>问题</value>
-    <comment>Issues Found</comment>
-  </data>
   <data name="LoadButtonText" xml:space="preserve">
     <value>载入</value>
-  </data>
-  <data name="LoadingMessage" xml:space="preserve">
-    <value>正在加载地图...</value>
-    <comment>Please wait, loading map...</comment>
   </data>
   <data name="LoadingMessageBoxText" xml:space="preserve">
     <value>Loading...</value>
   </data>
-  <data name="LoadingTitle" xml:space="preserve">
-    <value>加载中</value>
-    <comment>Loading</comment>
-  </data>
-  <data name="MapAutoSavedNotification" xml:space="preserve">
-    <value>地图已自动保存</value>
-    <comment>Map auto-saved</comment>
-  </data>
-  <data name="MapModifiedOutsideNotification" xml:space="preserve">
-    <value>地图文件已在编辑器外部被修改.地图的INI已重新加载。{0}{0}如果您对可见的地图数据(地形 对象 覆盖层等)在编辑器外部进行了编辑,您需要重新加载地图以应用更改.如果您只对其他INI进行了更改,您可以忽略此消息.</value>
-    <comment>The map file has been modified outside of the editor. The map's INI data has been reloaded.{0}{0}If you made edits to visible map data (terrain, objects, overlay etc.) outside of the editor, you can re-load the map to apply the effects. If you only made changes to other INI data, you can ignore this message.</comment>
-  </data>
   <data name="MapPathLabelText" xml:space="preserve">
     <value>可加载的地图文件地址 [可指定为相对地址]</value>
-  </data>
-  <data name="MapSavedNotification" xml:space="preserve">
-    <value>地图已保存</value>
-    <comment>Map saved</comment>
   </data>
   <data name="MapTooLarge_Message" xml:space="preserve">
     <value>地图宽度加高度不能超过 {0} 单元格</value>
@@ -246,10 +194,6 @@
   </data>
   <data name="MapTooWide_Title" xml:space="preserve">
     <value>地图太宽</value>
-  </data>
-  <data name="NewMap" xml:space="preserve">
-    <value>新地图</value>
-    <comment>New Map</comment>
   </data>
   <data name="RenderScaleLabelText" xml:space="preserve">
     <value>渲染比例: </value>

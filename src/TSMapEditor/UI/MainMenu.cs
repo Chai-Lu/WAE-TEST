@@ -66,7 +66,7 @@ namespace TSMapEditor.UI
             }
 
 #if DEBUG
-            // 当调试时，可能经常在不同的配置之间切换 - 使其更方便一些
+            // 当调试时，我们可能经常在不同的配置之间切换 - 使其更方便一些
             string expectedPath = Path.Combine(tbGameDirectory.Text, Constants.ExpectedClientExecutableName);
             if (!File.Exists(expectedPath))
             {
@@ -269,11 +269,13 @@ private void LbFileList_FileSelected(object sender, FileSelectionEventArgs e)
 
         private bool CheckGameDirectory()
         {
-            string[] files = Directory.GetFiles(tbGameDirectory.Text, "*Client.exe");
+            // 获取游戏目录下的所有.exe文件
+            string[] files = Directory.GetFiles(tbGameDirectory.Text, "*.exe");
 
             bool hasClientInName = false;
             string clientExecutablePath = string.Empty;
 
+            // 遍历所有.exe文件，检查文件名中是否包含"Client"
             foreach (string file in files)
             {
                 if (Path.GetFileName(file).Contains("Client"))
