@@ -383,12 +383,6 @@ namespace TSMapEditor.UI.Windows
 
         private void SetParameterEntryText(ScriptActionEntry scriptActionEntry, ScriptAction action)
         {
-            if (action == null)
-            {
-                tbParameterValue.Value = scriptActionEntry.Argument;
-                return;
-            }
-
             if (action.ParamType == TriggerParamType.BuildingWithProperty)
             {
                 tbParameterValue.Text = GetBuildingWithPropertyText(scriptActionEntry.Argument);
@@ -440,11 +434,6 @@ namespace TSMapEditor.UI.Windows
         private void FillPresetContextMenu(ScriptActionEntry entry, ScriptAction action)
         {
             btnEditorPresetValues.ContextMenu.ClearItems();
-
-            if (action == null)
-            {
-                return;
-            }
 
             action.PresetOptions.ForEach(p => btnEditorPresetValues.ContextMenu.AddItem(new XNAContextMenuItem() { Text = p.GetOptionText() }));
 
@@ -544,9 +533,9 @@ namespace TSMapEditor.UI.Windows
             for (int i = 0; i < editedScript.Actions.Count; i++)
             {
                 var actionEntry = editedScript.Actions[i];
-                lbActions.AddItem(new XNAListBoxItem()
-                {
-                    Text = GetActionEntryText(i, actionEntry),
+                lbActions.AddItem(new XNAListBoxItem() 
+                { 
+                    Text = GetActionEntryText(i, actionEntry), 
                     Tag = actionEntry
                 });
             }
@@ -558,7 +547,7 @@ namespace TSMapEditor.UI.Windows
         {
             ScriptAction action = GetScriptAction(entry.Action);
             if (action == null)
-                return "#" + index + " - Unknown (" + entry.Argument.ToString(CultureInfo.InvariantCulture) + ")";
+                return "#" + index + " - Unknown (" +  entry.Argument.ToString(CultureInfo.InvariantCulture) + ")";
 
             return "#" + index + " - " + action.Name + " (" + entry.Argument.ToString(CultureInfo.InvariantCulture) + ")";
         }
@@ -575,9 +564,10 @@ namespace TSMapEditor.UI.Windows
         private string GetActionDescriptionFromIndex(int index)
         {
             ScriptAction action = GetScriptAction(index);
-            string description = action == null ? "Unknown script action. It has most likely been added with another editor." : action.Description;
+            if (action == null)
+                return string.Empty;
 
-            return Renderer.FixText(description,
+            return Renderer.FixText(action.Description,
                 lblActionDescriptionValue.FontIndex,
                 lblActionDescriptionValue.Parent.Width - lblActionDescriptionValue.X * 2).Text;
         }

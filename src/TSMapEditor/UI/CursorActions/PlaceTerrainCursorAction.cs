@@ -36,7 +36,7 @@ namespace TSMapEditor.UI.CursorActions
             heightOffset = 0;
         }
 
-        public override void OnKeyPressed(KeyPressEventArgs e, Point2D cellCoords)
+        public override void OnKeyPressed(KeyPressEventArgs e)
         {
             if (Constants.IsFlatWorld)
                 return;

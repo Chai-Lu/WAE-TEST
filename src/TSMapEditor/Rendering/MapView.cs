@@ -124,7 +124,7 @@ namespace TSMapEditor.Rendering
         public Randomizer Randomizer => EditorState.Randomizer;
         public bool AutoLATEnabled => EditorState.AutoLATEnabled;
         public bool OnlyPaintOnClearGround => EditorState.OnlyPaintOnClearGround;
-        public CopiedMapData CopiedMapData
+        public CopiedMapData CopiedMapData 
         {
             get => EditorState.CopiedMapData;
             set => EditorState.CopiedMapData = value;
@@ -498,10 +498,10 @@ namespace TSMapEditor.Rendering
 
         private RenderTarget2D CreateFullMapRenderTarget(SurfaceFormat surfaceFormat, DepthFormat depthFormat = DepthFormat.None)
         {
-            return new RenderTarget2D(GraphicsDevice,
-                Map.WidthInPixels,
-                Map.HeightInPixels + (Constants.CellHeight * Constants.MaxMapHeightLevel), false, surfaceFormat,
-                depthFormat, 0, RenderTargetUsage.PreserveContents);
+           return new RenderTarget2D(GraphicsDevice,
+               Map.WidthInPixels,
+               Map.HeightInPixels + (Constants.CellHeight * Constants.MaxMapHeightLevel), false, surfaceFormat,
+               depthFormat, 0, RenderTargetUsage.PreserveContents);
         }
 
         public void DrawVisibleMapPortion()
@@ -1045,8 +1045,6 @@ namespace TSMapEditor.Rendering
             // buildingRenderer.Draw(graphicalBaseNode.Structure, true);
             // return;
 
-            int baseNodeIndex = graphicalBaseNode.Owner.BaseNodes.FindIndex(bn => bn == graphicalBaseNode.BaseNode);
-            Color baseNodeIndexColor = Color.White * 0.7f;
 
             Point2D drawPoint = CellMath.CellTopLeftPointFromCellCoords_3D(graphicalBaseNode.BaseNode.Position, Map);
 
@@ -1067,10 +1065,7 @@ namespace TSMapEditor.Rendering
 
             if ((graphics == null || graphics.GetFrame(frameIndex) == null) && (bibGraphics == null || bibGraphics.GetFrame(0) == null))
             {
-                DrawStringWithShadow(iniName, Constants.UIBoldFont, drawPoint.ToXNAVector(), replacementColor, 1.0f);
-
-                DrawStringWithShadow("#" + baseNodeIndex, Constants.UIBoldFont, drawPoint.ToXNAVector() + new Vector2(0f, 20f), baseNodeIndexColor);
-
+                DrawStringWithShadow(iniName, 1, drawPoint.ToXNAVector(), replacementColor, 1.0f);
                 return;
             }
 
@@ -1117,10 +1112,7 @@ namespace TSMapEditor.Rendering
 
             var frame = graphics.GetFrame(frameIndex);
             if (frame == null)
-            {
-                DrawStringWithShadow("#" + baseNodeIndex, Constants.UIBoldFont, drawPoint.ToXNAVector(), baseNodeIndexColor);
                 return;
-            }
 
             texture = frame.Texture;
 
@@ -1141,8 +1133,6 @@ namespace TSMapEditor.Rendering
                 palettedColorDrawEffect.Parameters["UseRemap"].SetValue(true);
                 DrawTexture(graphics.GetRemapFrame(frameIndex).Texture, drawRectangle, remapColor);
             }
-
-            DrawStringWithShadow("#" + baseNodeIndex, Constants.UIBoldFont, drawPoint.ToXNAVector(), baseNodeIndexColor);
         }
 
         private void DrawWaypoint(Waypoint waypoint)
@@ -1169,8 +1159,8 @@ namespace TSMapEditor.Rendering
 
         private void DrawCellTag(CellTag cellTag)
         {
-            Point2D drawPoint = EditorState.Is2DMode ?
-                CellMath.CellTopLeftPointFromCellCoords(cellTag.Position, Map) :
+            Point2D drawPoint = EditorState.Is2DMode ? 
+                CellMath.CellTopLeftPointFromCellCoords(cellTag.Position, Map) : 
                 CellMath.CellTopLeftPointFromCellCoords_3D(cellTag.Position, Map);
 
             const float cellTagAlpha = 0.45f;
@@ -1262,8 +1252,8 @@ namespace TSMapEditor.Rendering
 
         private void DrawRangeIndicator(Point2D cellCoords, double range, Color color)
         {
-            Point2D center = EditorState.Is2DMode ?
-                CellMath.CellCenterPointFromCellCoords(cellCoords, Map) :
+            Point2D center = EditorState.Is2DMode ? 
+                CellMath.CellCenterPointFromCellCoords(cellCoords, Map) : 
                 CellMath.CellCenterPointFromCellCoords_3D(cellCoords, Map);
 
             // Range is specified in "tile edge lengths",
@@ -1312,7 +1302,7 @@ namespace TSMapEditor.Rendering
                             bool overlapObjects = KeyboardCommands.Instance.OverlapObjects.AreKeysOrModifiersDown(Keyboard);
                             if (KeyboardCommands.Instance.CloneObject.AreKeysOrModifiersDown(Keyboard))
                             {
-                                if ((draggedOrRotatedObject.IsTechno() || draggedOrRotatedObject.WhatAmI() == RTTIType.Terrain) &&
+                                if ((draggedOrRotatedObject.IsTechno() || draggedOrRotatedObject.WhatAmI() == RTTIType.Terrain) && 
                                     Map.CanPlaceObjectAt(draggedOrRotatedObject, tileUnderCursor.CoordsToPoint(), true, overlapObjects))
                                 {
                                     var mutation = new CloneObjectMutation(MutationTarget, draggedOrRotatedObject, tileUnderCursor.CoordsToPoint());
@@ -1480,8 +1470,8 @@ namespace TSMapEditor.Rendering
             windowController.MinimapWindow.CameraRectangle = new Rectangle(Camera.TopLeftPoint.ToXNAPoint(), new Point2D(Width, Height).ScaleBy(1.0 / Camera.ZoomLevel).ToXNAPoint());
 
             Point2D cursorMapPoint = GetCursorMapPoint();
-            Point2D tileCoords = EditorState.Is2DMode ?
-                CellMath.CellCoordsFromPixelCoords_2D(cursorMapPoint, Map) :
+            Point2D tileCoords = EditorState.Is2DMode ? 
+                CellMath.CellCoordsFromPixelCoords_2D(cursorMapPoint, Map) : 
                 CellMath.CellCoordsFromPixelCoords(cursorMapPoint, Map, CursorAction == null || CursorAction.SeeThrough);
 
             var tile = Map.GetTile(tileCoords.X, tileCoords.Y);
@@ -1499,7 +1489,7 @@ namespace TSMapEditor.Rendering
                         DeleteObjectFromCell(tileUnderCursor.CoordsToPoint());
                 }
             }
-
+            
             base.Update(gameTime);
         }
 
@@ -1536,7 +1526,7 @@ namespace TSMapEditor.Rendering
 
             if (!e.Handled && CursorAction != null && CursorAction.HandlesKeyboardInput)
             {
-                CursorAction.OnKeyPressed(e, tileUnderCursor == null ? Point2D.NegativeOne : tileUnderCursor.CoordsToPoint());
+                CursorAction.OnKeyPressed(e);
             }
         }
 
@@ -1675,7 +1665,7 @@ namespace TSMapEditor.Rendering
 
         private void DrawImpassableHighlight(MapTile cell)
         {
-            if (!Helpers.IsLandTypeImpassable(TheaterGraphics.GetTileGraphics(cell.TileIndex).GetSubTile(cell.SubTileIndex).TmpImage.TerrainType, false) &&
+            if (!Helpers.IsLandTypeImpassable(TheaterGraphics.GetTileGraphics(cell.TileIndex).GetSubTile(cell.SubTileIndex).TmpImage.TerrainType, false) && 
                 (cell.Overlay == null || cell.Overlay.OverlayType == null || !Helpers.IsLandTypeImpassable(cell.Overlay.OverlayType.Land, false)))
             {
                 return;

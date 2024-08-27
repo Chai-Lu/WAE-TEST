@@ -57,7 +57,7 @@ namespace TSMapEditor.UI.CursorActions
         private int originLevelOffset;
 
 
-        public override void OnKeyPressed(KeyPressEventArgs e, Point2D cellCoords)
+        public override void OnKeyPressed(KeyPressEventArgs e)
         {
             if (Constants.IsFlatWorld)
                 return;
@@ -139,7 +139,7 @@ namespace TSMapEditor.UI.CursorActions
                         originalOverlay.Add(new OriginalOverlayInfo(cell.CoordsToPoint(), null, Constants.NO_OVERLAY));
 
                     var overlayType = Map.Rules.OverlayTypes.Find(ot => ot.ININame == overlayEntry.OverlayTypeName);
-                    if (overlayType == null)
+                    if (overlayType == null) 
                     {
                         continue;
                     }
@@ -235,7 +235,7 @@ namespace TSMapEditor.UI.CursorActions
                 return;
 
             bool allowOverlap = KeyboardCommands.Instance.OverlapObjects.AreKeysOrModifiersDown(keyboard);
-
+            
             var mutation = new PasteTerrainMutation(CursorActionTarget.MutationTarget, copiedMapData, cellCoords, allowOverlap, originLevelOffset);
             CursorActionTarget.MutationManager.PerformMutation(mutation);
         }

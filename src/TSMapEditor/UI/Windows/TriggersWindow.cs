@@ -406,7 +406,7 @@ namespace TSMapEditor.UI.Windows
             var tag = map.Tags.Find(t => t.Trigger == editedTrigger);
             if (tag == null)
             {
-                EditorMessageBox.Show(WindowManager, "No tag found",
+                EditorMessageBox.Show(WindowManager, "No tag found", 
                     $"The selected trigger '{editedTrigger.Name}' has no" +
                     $"associated tag. As such, it is not attached to any objects.",
                     MessageBoxButtons.OK);
@@ -748,7 +748,7 @@ namespace TSMapEditor.UI.Windows
                                     mediumDifficultyTrigger.Actions[i].Parameters[j] = mediumTeamType.ININame;
                                     easyDifficultyTrigger.Actions[i].Parameters[j] = easyTeamType.ININame;
 
-                                    clonedTeamTypes.Add(new(teamType, mediumTeamType, easyTeamType));
+                                    clonedTeamTypes.Add(new (teamType, mediumTeamType, easyTeamType));
                                 }
                             }
                         }
@@ -1456,7 +1456,7 @@ namespace TSMapEditor.UI.Windows
                     break;
                 case TriggerSortMode.Name:
                     sortedTriggers = sortedTriggers.OrderBy(t => t.Name).ThenBy(t => t.ID).ToList();
-                    break;
+                    break;                
                 case TriggerSortMode.ColorThenName:
                     sortedTriggers = sortedTriggers.OrderBy(t => t.EditorColor).ThenBy(t => t.Name).ToList();
                     break;
@@ -1469,10 +1469,10 @@ namespace TSMapEditor.UI.Windows
             foreach (Trigger trigger in sortedTriggers)
             {
                 lbTriggers.AddItem(new XNAListBoxItem()
-                {
-                    Text = trigger.Name,
-                    Tag = trigger,
-                    TextColor = trigger.EditorColor == null ? lbTriggers.DefaultItemColor : trigger.XNAColor
+                { 
+                    Text = trigger.Name, 
+                    Tag = trigger, 
+                    TextColor = trigger.EditorColor == null ? lbTriggers.DefaultItemColor : trigger.XNAColor 
                 });
             }
 
@@ -1703,19 +1703,11 @@ namespace TSMapEditor.UI.Windows
             TriggerAction triggerAction = editedTrigger.Actions[lbActions.SelectedIndex];
             int paramNumber = (int)lbActionParameters.SelectedItem.Tag;
             var triggerActionType = GetTriggerActionType(triggerAction.ActionIndex);
-            if (triggerActionType != null)
-            {
-                var triggerActionParam = triggerActionType.Parameters[paramNumber];
-                var triggerParamType = triggerActionParam.TriggerParamType;
+            var triggerActionParam = triggerActionType.Parameters[paramNumber];
+            var triggerParamType = triggerActionParam.TriggerParamType;
 
-                tbActionParameterValue.Text = GetParamValueText(triggerAction.Parameters[paramNumber], triggerParamType, triggerActionParam.PresetOptions);
-                tbActionParameterValue.TextColor = GetParamValueColor(triggerAction.Parameters[paramNumber], triggerParamType);
-            }
-            else
-            {
-                tbActionParameterValue.Text = triggerAction.Parameters[paramNumber];
-                tbActionParameterValue.TextColor = UISettings.ActiveSettings.AltColor;
-            }
+            tbActionParameterValue.Text = GetParamValueText(triggerAction.Parameters[paramNumber], triggerParamType, triggerActionParam.PresetOptions);
+            tbActionParameterValue.TextColor = GetParamValueColor(triggerAction.Parameters[paramNumber], triggerParamType);
 
             tbActionParameterValue.TextChanged += TbActionParameterValue_TextChanged;
         }
@@ -1838,19 +1830,10 @@ namespace TSMapEditor.UI.Windows
             TriggerCondition triggerCondition = editedTrigger.Conditions[lbEvents.SelectedIndex];
             int paramNumber = (int)lbEventParameters.SelectedItem.Tag;
             var triggerEventType = GetTriggerEventType(editedTrigger.Conditions[lbEvents.SelectedIndex].ConditionIndex);
+            var triggerParamType = triggerEventType.Parameters[paramNumber]?.TriggerParamType ?? TriggerParamType.Unknown;
 
-            if (triggerEventType != null)
-            {
-                var triggerParamType = triggerEventType.Parameters[paramNumber]?.TriggerParamType ?? TriggerParamType.Unknown;
-
-                tbEventParameterValue.Text = GetParamValueText(triggerCondition.Parameters[paramNumber], triggerParamType, null);
-                tbEventParameterValue.TextColor = GetParamValueColor(triggerCondition.Parameters[paramNumber], triggerParamType);
-            }
-            else
-            {
-                tbEventParameterValue.Text = triggerCondition.Parameters[paramNumber];
-                tbEventParameterValue.TextColor = UISettings.ActiveSettings.AltColor;
-            }
+            tbEventParameterValue.Text = GetParamValueText(triggerCondition.Parameters[paramNumber], triggerParamType, null);
+            tbEventParameterValue.TextColor = GetParamValueColor(triggerCondition.Parameters[paramNumber], triggerParamType);
 
             tbEventParameterValue.TextChanged += TbEventParameterValue_TextChanged;
         }
